@@ -1,10 +1,9 @@
 package com.maboxuan.service.impl;
 
 
-import com.maboxuan.entities.CommonResult;
-import com.maboxuan.entities.MbxUser;
-import com.maboxuan.entities.MbxUserExample;
+import com.maboxuan.entities.*;
 import com.maboxuan.mapper.MbxUserMapper;
+import com.maboxuan.mapper.MessageMapper;
 import com.maboxuan.service.UserService;
 import com.mysql.jdbc.StringUtils;
 import org.springframework.stereotype.Service;
@@ -25,7 +24,8 @@ public class UserServiceImpl implements UserService {
     @Resource
     private MbxUserMapper mbxUserMapper;
 
-
+    @Resource
+    private MessageMapper messageMapper;
     @Override
     public CommonResult login(MbxUser mbxUser) {
 
@@ -39,16 +39,45 @@ public class UserServiceImpl implements UserService {
             if (!CollectionUtils.isEmpty(mbxUsers)) {
                 if (mbxUser.getPassword().equals(mbxUsers.get(0).getPassword())) {
 
-                    commonResult.setCode(200);
+                    commonResult.setMessage("登陆成功");
                     return commonResult;
                 }
-                commonResult.setCode(201);
+                commonResult.setMessage("用户密码错误");
                 return commonResult;
             }
         }
-        commonResult.setCode(202);
+        commonResult.setMessage("用户不存在！");
         return commonResult;
 
+    }
+
+    @Override
+    public CommonResult register(MbxUser mbxUser) {
+        CommonResult commonResult = new CommonResult();
+        MbxUserExample mbxUserExample = new MbxUserExample();
+        MbxUserExample.Criteria criteria = mbxUserExample.createCriteria().andUserNameEqualTo(mbxUser.getUserName());
+        List<MbxUser> mbxUsers = mbxUserMapper.selectByExample(mbxUserExample);
+        if(!CollectionUtils.isEmpty(mbxUsers)){
+            commonResult.setMessage("用户已存在");
+        }
+        int insert = mbxUserMapper.insert(mbxUser);
+        commonResult.setMessage("注册成功");
+        return commonResult;
+    }
+
+    @Override
+    public CommonResult addMessage(Message message) {
+        return null;
+    }
+
+    @Override
+    public CommonResult getAllMessage() {
+        CommonResult commonResult = new CommonResult();
+
+        MessageExample messageExample = new MessageExample();
+        List<Message> allMessage = messageMapper.selectByExample(messageExample);
+        commonResult.setData(allMessage);
+        return commonResult;
     }
 
 }

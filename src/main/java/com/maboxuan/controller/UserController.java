@@ -27,4 +27,18 @@ public class UserController {
         CommonResult commonResult = userService.login(mbxUser);
         return commonResult;
     }
+
+    @RequestMapping("/register")
+    public CommonResult register(@RequestBody MbxUser mbxUser){
+        CommonResult commonResult = userService.register(mbxUser);
+        return commonResult;
+    }
+
+    @RequestMapping("/getAllMessage")
+    @ResponseBody
+    public CommonResult getAllMessage(){
+        CommonResult allMessage = userService.getAllMessage();
+        return allMessage;
+
+    }
 }
