@@ -68,7 +68,7 @@
   <sql id="Base_Column_List">
     id, user_name, password, user_extra_id
   </sql>
-  <select id="selectByExample" parameterType="com.maboxuan.entity.MbxUserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.maboxuan.entities.MbxUserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -92,19 +92,19 @@
     delete from mbx_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.maboxuan.entity.MbxUserExample">
+  <delete id="deleteByExample" parameterType="com.maboxuan.entities.MbxUserExample">
     delete from mbx_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.maboxuan.entity.MbxUser">
+  <insert id="insert" parameterType="com.maboxuan.entities.MbxUser">
     insert into mbx_user (id, user_name, password, 
       user_extra_id)
     values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{userExtraId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.maboxuan.entity.MbxUser">
+  <insert id="insertSelective" parameterType="com.maboxuan.entities.MbxUser">
     insert into mbx_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -135,7 +135,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.maboxuan.entity.MbxUserExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.maboxuan.entities.MbxUserExample" resultType="java.lang.Long">
     select count(*) from mbx_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -171,7 +171,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.maboxuan.entity.MbxUser">
+  <update id="updateByPrimaryKeySelective" parameterType="com.maboxuan.entities.MbxUser">
     update mbx_user
     <set>
       <if test="userName != null">
@@ -186,7 +186,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.maboxuan.entity.MbxUser">
+  <update id="updateByPrimaryKey" parameterType="com.maboxuan.entities.MbxUser">
     update mbx_user
     set user_name = #{userName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},

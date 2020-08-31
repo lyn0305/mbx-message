@@ -2,8 +2,10 @@ package com.maboxuan.entities;
 
 import lombok.Data;
 
+import java.io.Serializable;
 
-public class MbxUser {
+
+public class MbxUser implements Serializable {
     private Integer id;
 
     private String userName;

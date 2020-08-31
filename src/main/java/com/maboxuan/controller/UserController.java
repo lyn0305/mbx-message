@@ -6,6 +6,7 @@ import com.maboxuan.entities.MbxUser;
 import com.maboxuan.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.jni.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,10 +18,10 @@ import javax.annotation.Resource;
 @Slf4j
 public class UserController {
 
-    @Resource
+    @Autowired
     UserService userService;
 
-    @RequestMapping("login")
+    @RequestMapping("/login")
     @ResponseBody
     public CommonResult login(@RequestBody MbxUser mbxUser){
         CommonResult commonResult = userService.login(mbxUser);

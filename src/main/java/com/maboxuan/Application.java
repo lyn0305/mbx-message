@@ -7,8 +7,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 
-@SpringBootApplication(exclude = MybatisAutoConfiguration.class)
-@ServletComponentScan
+@SpringBootApplication
+//@ServletComponentScan
 @MapperScan("com.maboxuan.mapper")
 public class Application {
     public static void main(String[] args){

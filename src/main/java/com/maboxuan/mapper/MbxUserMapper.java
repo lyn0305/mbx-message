@@ -2,12 +2,10 @@ package com.maboxuan.mapper;
 
 import com.maboxuan.entities.MbxUser;
 import com.maboxuan.entities.MbxUserExample;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-@Mapper
 public interface MbxUserMapper {
     long countByExample(MbxUserExample example);
 

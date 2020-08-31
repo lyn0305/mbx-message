@@ -9,6 +9,7 @@ import com.maboxuan.service.UserService;
 import com.mysql.jdbc.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import javax.jws.WebService;
@@ -18,7 +19,6 @@ import java.util.List;
  * Created by xiaour.github.com on 2017/11/8.
  */
 @Service
-@Transactional(rollbackFor = Exception.class)
 public class UserServiceImpl implements UserService {
 
 
@@ -32,11 +32,11 @@ public class UserServiceImpl implements UserService {
         CommonResult commonResult = new CommonResult();
 
         String userName = mbxUser.getUserName();
-        if (StringUtils.isNullOrEmpty(userName)) {
+        if (!userName.isEmpty()) {
             MbxUserExample mbxUserExample = new MbxUserExample();
             MbxUserExample.Criteria criteria = mbxUserExample.createCriteria().andUserNameEqualTo(userName);
             List<MbxUser> mbxUsers = mbxUserMapper.selectByExample(mbxUserExample);
-            if (mbxUsers != null && mbxUsers.get(0) != null) {
+            if (!CollectionUtils.isEmpty(mbxUsers)) {
                 if (mbxUser.getPassword().equals(mbxUsers.get(0).getPassword())) {
 
                     commonResult.setCode(200);
