@@ -6,6 +6,7 @@
     <result column="message" jdbcType="VARCHAR" property="message" />
     <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, message, updateTime, user_id
+    id, message, updateTime, user_id, user_name
   </sql>
   <select id="selectByExample" parameterType="com.maboxuan.entities.MessageExample" resultMap="BaseResultMap">
     select
@@ -100,9 +101,9 @@
   </delete>
   <insert id="insert" parameterType="com.maboxuan.entities.Message">
     insert into message (id, message, updateTime, 
-      user_id)
+      user_id, user_name)
     values (#{id,jdbcType=INTEGER}, #{message,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, 
-      #{userId,jdbcType=INTEGER})
+      #{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.maboxuan.entities.Message">
     insert into message
@@ -119,6 +120,9 @@
       <if test="userId != null">
         user_id,
       </if>
+      <if test="userName != null">
+        user_name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -132,6 +136,9 @@
       </if>
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -156,6 +163,9 @@
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=INTEGER},
       </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -166,7 +176,8 @@
     set id = #{record.id,jdbcType=INTEGER},
       message = #{record.message,jdbcType=VARCHAR},
       updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
-      user_id = #{record.userId,jdbcType=INTEGER}
+      user_id = #{record.userId,jdbcType=INTEGER},
+      user_name = #{record.userName,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -183,6 +194,9 @@
       <if test="userId != null">
         user_id = #{userId,jdbcType=INTEGER},
       </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -190,7 +204,8 @@
     update message
     set message = #{message,jdbcType=VARCHAR},
       updateTime = #{updatetime,jdbcType=TIMESTAMP},
-      user_id = #{userId,jdbcType=INTEGER}
+      user_id = #{userId,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

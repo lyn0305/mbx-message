@@ -1,8 +1,14 @@
 server:
-  port: 80
+  port: 8080
 
 
 spring:
+  resources:
+    static-locations: classpath:/static
+  thymeleaf:
+    suffix: .html
+    prefix: classpath:/templates/
+    mode: LEGACYHTML5
   application:
     name: mbx-message
   datasource:

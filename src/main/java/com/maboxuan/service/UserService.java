@@ -5,8 +5,6 @@ import com.maboxuan.entities.CommonResult;
 import com.maboxuan.entities.MbxUser;
 import com.maboxuan.entities.Message;
 
-import java.util.List;
-
 /**
  * Created by maboxuan
  */

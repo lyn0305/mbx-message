@@ -5,13 +5,10 @@ import com.maboxuan.entities.*;
 import com.maboxuan.mapper.MbxUserMapper;
 import com.maboxuan.mapper.MessageMapper;
 import com.maboxuan.service.UserService;
-import com.mysql.jdbc.StringUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import javax.jws.WebService;
 import java.util.List;
 
 /**
@@ -67,7 +64,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public CommonResult addMessage(Message message) {
-        return null;
+        CommonResult commonResult = new CommonResult();
+        int insert = messageMapper.insert(message);
+        if(insert >0){
+            commonResult.setCode(200);
+            return commonResult;
+        }
+        commonResult.setCode(500);
+        return commonResult;
     }
 
     @Override

@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class JumpController {
 
-    @RequestMapping(value = "testupload", method = RequestMethod.GET)
+    @RequestMapping(value = "index", method = RequestMethod.GET)
     public String testUpload() {
-        return "Index";
+        return "index";
     }
 }
